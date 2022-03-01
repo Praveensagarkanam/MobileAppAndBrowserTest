@@ -9,14 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ResultsPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public ResultsPage(WebDriver driver){
         this.driver = driver;
     }
 
-    private By AddToCartButton =By.id("add-to-cart-button");
-    private By ProceedToCheckoutButton = By.xpath("//button[@name='proceedToRetailCheckout']");
+    private final By AddToCartButton =By.id("add-to-cart-button");
+    private final By GoToCartButton = By.xpath("//android.view.View[@text='1']");
+    private final By SubTotalText = By.xpath("//android.view.View[@text='$399.99']");
 
     public void ClickAddToCart() throws InterruptedException {
         Thread.sleep(2000);
@@ -25,11 +26,19 @@ public class ResultsPage {
         element.click();
         Thread.sleep(4000);
     }
+    public void GoToCart() throws InterruptedException{
+        Thread.sleep(2000);
+        WebElement element = driver.findElement(GoToCartButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",element);
+        element.click();
+        Thread.sleep(4000);
 
-    public void ClickOnProceedToCheckoutButton(){
+    }
+
+    public void SubTotalText(){
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ProceedToCheckoutButton));
-        driver.findElement(ProceedToCheckoutButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SubTotalText));
+        driver.findElement(SubTotalText).click();
     }
 
 }

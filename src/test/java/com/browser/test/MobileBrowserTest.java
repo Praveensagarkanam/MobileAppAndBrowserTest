@@ -37,7 +37,7 @@ public class MobileBrowserTest {
         homePage.ClickGoButton();
         homePage.ClickFirstSearchResult();
         resultsPage.ClickAddToCart();
-        resultsPage.ClickOnProceedToCheckoutButton();
+        resultsPage.SubTotalText();
     }
 
     @AfterTest
